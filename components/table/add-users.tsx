@@ -37,6 +37,10 @@ export function AddUser({ onAdd }: AddUserProps) {
     salary: 0,
     commission: 0,
     department: 'Engineering',
+    id: 0, 
+    status: 'Active',
+    active: true,
+    joinDate: '', 
   });
 
   const [errors, setErrors] = useState<Record<string, string>>({
@@ -50,12 +54,17 @@ export function AddUser({ onAdd }: AddUserProps) {
 
   const handleChange = (key: string, value: string | number) => {
     setForm((prev) => ({ ...prev, [key]: value }));
-    // Clear error for this field when user starts typing
     setErrors(prev => ({ ...prev, [key]: '' }));
   };
 
   const handleSubmit = () => {
-    const validation = validateEmployeeForm(form);
+    // Add a temporary ID for validation
+    const formDataForValidation = {
+      ...form,
+      id: Date.now(),
+    };
+    
+    const validation = validateEmployeeForm(formDataForValidation);
     
     if (!validation.isValid) {
       setErrors(validation.errors);
@@ -70,11 +79,10 @@ export function AddUser({ onAdd }: AddUserProps) {
       salary: form.salary || 0,
       commission: form.commission || 0,
       department: form.department || 'Engineering',
-      status: 'Active',
-      active: true,
-      joinDate: new Date().toISOString().split('T')[0],
+      status: form.status || 'Active',
+      active: form.active !== undefined ? form.active : true,
+      joinDate: form.joinDate || new Date().toISOString().split('T')[0],
     };
-
     onAdd(newUser);
     toast.success(`User "${form.name}" has been added successfully!`);
 
@@ -87,22 +95,41 @@ export function AddUser({ onAdd }: AddUserProps) {
       department: 'Engineering',
       status: 'Active',
       active: true,
-      joinDate: new Date().toISOString().split('T')[0],
-    });
-
-    setErrors({
-      name: '',
-      email: '',
-      phone: '',
-      salary: '',
-      commission: '',
+      joinDate: '',
     });
 
     setOpen(false);
   };
 
+  const handleDialogClose = (isOpen: boolean) => {
+    setOpen(isOpen);
+    if (!isOpen) {
+      // Reset form to default values when dialog is closed
+      setForm({
+        name: '',
+        email: '',
+        phone: '',
+        salary: 0,
+        commission: 0,
+        department: 'Engineering',
+        id: 0,
+        status: 'Active',
+        active: true,
+        joinDate: '',
+      });
+      setErrors({
+        name: '',
+        email: '',
+        phone: '',
+        salary: '',
+        commission: '',
+        department: '',
+      });
+    }
+  };
+
   return (
-    <Dialog open={open} onOpenChange={setOpen}>
+    <Dialog open={open} onOpenChange={handleDialogClose}>
       <DialogTrigger asChild>
         <Button className="cursor-pointer">Add User</Button>
       </DialogTrigger>
@@ -144,7 +171,7 @@ export function AddUser({ onAdd }: AddUserProps) {
             <Input
               placeholder="Salary"
               type="number"
-              value={form.salary}
+              value={String(form.salary)}
               onChange={(e) => handleChange('salary', Number(e.target.value))}
             />
             {errors.salary && <p className="text-sm text-red-500">{errors.salary}</p>}
@@ -154,7 +181,7 @@ export function AddUser({ onAdd }: AddUserProps) {
             <Input
               placeholder="Commission"
               type="number"
-              value={form.commission}
+              value={String(form.commission)}
               onChange={(e) => handleChange('commission', Number(e.target.value))}
             />
             {errors.commission && <p className="text-sm text-red-500">{errors.commission}</p>}

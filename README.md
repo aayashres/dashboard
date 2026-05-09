@@ -1,6 +1,6 @@
 # Dashboard Application
 
-A production-quality dashboard application built with Next.js, TypeScript, and modern web technologies. Features an editable data table with advanced functionality, collapsible sidebar, and comprehensive validation system.
+A dashboard application built with Next.js, TypeScript, and modern web technologies. Features an editable data table with advanced functionality, collapsible sidebar, and comprehensive validation system.
 
 ## 🎥 Demo Video
 
@@ -14,7 +14,7 @@ A production-quality dashboard application built with Next.js, TypeScript, and m
 
 **Key Features Demonstrated:**
 - ✏️ Inline table editing with real-time validation
-- 📊 Column resizing and sorting
+- 📊 Column sorting
 - 🎨 Collapsible sidebar navigation
 - 🔍 Advanced filtering and search
 - ✅ Form validation with error handling
@@ -31,7 +31,7 @@ A production-quality dashboard application built with Next.js, TypeScript, and m
 
 1. Clone the repository:
 ```bash
-git clone <repository-url>
+git clone https://github.com/aayashres/dashboard.git
 cd dashboard-app
 ```
 
@@ -70,28 +70,11 @@ npm start
 ### 📊 Advanced Data Table
 - **Editable Rows**: Inline editing with real-time validation
 - **Dynamic Validation**: Zod-based validation system with error feedback
-- **Column Resizing**: Drag-to-resize columns with persistent widths
 - **Sorting**: Multi-column sorting with visual indicators
 - **Filtering**: Global search and column-specific filtering
 - **Pagination**: Client-side pagination with customizable page sizes
 - **Column Visibility**: Toggle column visibility
 - **Action Buttons**: Edit, save, cancel, and delete operations
-
-### 🎨 User Interface
-- **Collapsible Sidebar**: Responsive navigation with smooth transitions
-- **Theme Toggle**: Dark/light mode support
-- **Toast Notifications**: User feedback for all actions
-- **Confirmation Dialogs**: Safe deletion with confirmation prompts
-- **Responsive Design**: Mobile-friendly layout
-- **Loading States**: Skeleton loaders and empty states
-
-### 🔧 Developer Experience
-- **Type Safety**: Strict TypeScript throughout
-- **Component Architecture**: Modular, reusable components
-- **Custom Hooks**: Encapsulated business logic
-- **Validation System**: Centralized Zod schemas
-- **Field Renderers**: Extensible field type system
-- **Error Handling**: Comprehensive error boundaries
 
 ## 📁 Project Structure
 
@@ -136,11 +119,3 @@ npm start
 - **Collapsible Sidebar**: Animated navigation with state persistence
 - **Responsive Design**: Mobile-first approach
 - **Theme Support**: Dark/light mode switching
-
-## 🔌 Available Scripts
-
-- `npm run dev` - Start development server
-- `npm run build` - Build for production
-- `npm run start` - Start production server
-- `npm run lint` - Run ESLint
-- `npm run type-check` - Run TypeScript checks

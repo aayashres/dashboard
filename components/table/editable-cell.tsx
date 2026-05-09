@@ -31,7 +31,7 @@ export function EditableCell({
   const fieldError = validationErrors?.find((error) => error.field === columnId);
 
   if (!isEditing || !meta?.editable) {
-    return <span>{String(value || '')}</span>;
+    return <span>{String(value)}</span>;
   }
 
   return (

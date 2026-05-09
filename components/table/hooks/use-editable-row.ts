@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useCallback } from "react";
 import { toast } from "sonner";
+import { employeeSchema } from "@/lib/validators";
 
 interface ValidationError {
   field: string;
@@ -15,31 +16,13 @@ export function useEditableRow<T extends { id: number }>(initialData: T[]) {
   const [validationErrors, setValidationErrors] = useState<ValidationError[]>([]);
 
   const validateField = (field: string, value: string | number | boolean | undefined): string | null => {
-    switch (field) {
-      case 'email':
-        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        if (!emailRegex.test(String(value))) {
-          return 'Invalid email format';
-        }
-        break;
-      case 'phone':
-        const phoneRegex = /^[\d\s\-\+\(\)]+$/;
-        if (value && !phoneRegex.test(String(value))) {
-          return 'Phone number can only contain digits, spaces, and +()-';
-        }
-        if (value && String(value).replace(/\D/g, '').length < 10) {
-          return 'Phone number must have at least 10 digits';
-        }
-        break;
-      case 'salary':
-      case 'commission':
-        const numValue = Number(value);
-        if (isNaN(numValue) || numValue < 0) {
-          return 'Must be a positive number';
-        }
-        break;
+    try {
+      const fieldSchema = employeeSchema.pick({ [field]: true } as { [K in keyof typeof employeeSchema.shape]: true });
+      const result = fieldSchema.safeParse({ [field]: value });
+      return result.success ? null : result.error.issues[0]?.message || 'Validation failed';
+    } catch {
+      return 'Validation error';
     }
-    return null;
   };
 
   const validateDraft = (): boolean => {

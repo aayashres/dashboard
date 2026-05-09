@@ -106,46 +106,57 @@ export function EditableTable({ columns, data }: Props) {
           </TableHeader>
 
           <TableBody>
-            {table.getRowModel().rows.map((row) => {
-              const isEditing =
-                editing.editingRowId === row.original.id;
+            {table.getRowModel().rows.length === 0 ? (
+              <TableRow>
+                <TableCell 
+                  colSpan={table.getHeaderGroups()[0]?.headers.length || 1} 
+                  className="text-center py-8 text-muted-foreground"
+                >
+                  No user found
+                </TableCell>
+              </TableRow>
+            ) : (
+              table.getRowModel().rows.map((row) => {
+                const isEditing =
+                  editing.editingRowId === row.original.id;
 
-              return (
-                <TableRow key={row.id}>
-                  {row.getVisibleCells().map((cell) => {
-                    const meta =
-                      cell.column.columnDef.meta as { editable?: boolean } | undefined;
+                return (
+                  <TableRow key={row.id}>
+                    {row.getVisibleCells().map((cell) => {
+                      const meta =
+                        cell.column.columnDef.meta as { editable?: boolean } | undefined;
 
-                    // Use custom cell renderer if it exists (like for actions column)
-                    if (cell.column.columnDef.cell && !meta?.editable) {
+                      // Use custom cell renderer if it exists (like for actions column)
+                      if (cell.column.columnDef.cell && !meta?.editable) {
+                        return (
+                          <TableCell key={cell.id}>
+                            {flexRender(
+                              cell.column.columnDef.cell,
+                              cell.getContext()
+                            )}
+                          </TableCell>
+                        );
+                      }
+
                       return (
                         <TableCell key={cell.id}>
-                          {flexRender(
-                            cell.column.columnDef.cell,
-                            cell.getContext()
-                          )}
+                          <EditableCell
+                            value={cell.getValue()}
+                            rowId={row.original.id}
+                            columnId={cell.column.id}
+                            meta={meta}
+                            isEditing={isEditing}
+                            draft={editing.draftRow}
+                            setDraft={editing.setDraftRow}
+                            validationErrors={editing.validationErrors}
+                          />
                         </TableCell>
                       );
-                    }
-
-                    return (
-                      <TableCell key={cell.id}>
-                        <EditableCell
-                          value={cell.getValue()}
-                          rowId={row.original.id}
-                          columnId={cell.column.id}
-                          meta={meta}
-                          isEditing={isEditing}
-                          draft={editing.draftRow}
-                          setDraft={editing.setDraftRow}
-                          validationErrors={editing.validationErrors}
-                        />
-                      </TableCell>
-                    );
-                  })}
-                </TableRow>
-              );
-            })}
+                    })}
+                  </TableRow>
+                );
+              })
+            )}
           </TableBody>
         </Table>
       </div>
