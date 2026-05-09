@@ -1,36 +1,146 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Dashboard Application
 
-## Getting Started
+A production-quality dashboard application built with Next.js, TypeScript, and modern web technologies. Features an editable data table with advanced functionality, collapsible sidebar, and comprehensive validation system.
 
-First, run the development server:
+## 🎥 Demo Video
 
+<div align="center">
+  <a href="YOUR_VIDEO_URL_HERE">
+    <img src="https://img.youtube.com/vi/YOUR_VIDEO_ID_HERE/maxresdefault.jpg" alt="Dashboard Application Demo" width="800"/>
+  </a>
+</div>
+
+*Click the image above to watch the demo video*
+
+**Key Features Demonstrated:**
+- ✏️ Inline table editing with real-time validation
+- 📊 Column resizing and sorting
+- 🎨 Collapsible sidebar navigation
+- 🔍 Advanced filtering and search
+- ✅ Form validation with error handling
+- 🗑️ Safe deletion with confirmation dialogs
+
+## 🚀 Getting Started
+
+### Prerequisites
+
+- Node.js 18+ 
+- npm 
+
+### Installation
+
+1. Clone the repository:
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+git clone <repository-url>
+cd dashboard-app
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+2. Install dependencies:
+```bash
+npm install
+```
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+3. Run the development server:
+```bash
+npm run dev
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+4. Open [http://localhost:3000](http://localhost:3000) in your browser.
 
-## Learn More
+### Build for Production
 
-To learn more about Next.js, take a look at the following resources:
+```bash
+npm run build
+npm start
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 🛠️ Tech Stack
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- **Framework**: Next.js 14 (App Router)
+- **Language**: TypeScript (strict mode)
+- **Styling**: Tailwind CSS
+- **UI Components**: ShadCN UI
+- **Table**: TanStack Table v8
+- **Validation**: Zod
+- **Notifications**: Sonner
+- **Icons**: Lucide React
 
-## Deploy on Vercel
+## ✨ Features
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### 📊 Advanced Data Table
+- **Editable Rows**: Inline editing with real-time validation
+- **Dynamic Validation**: Zod-based validation system with error feedback
+- **Column Resizing**: Drag-to-resize columns with persistent widths
+- **Sorting**: Multi-column sorting with visual indicators
+- **Filtering**: Global search and column-specific filtering
+- **Pagination**: Client-side pagination with customizable page sizes
+- **Column Visibility**: Toggle column visibility
+- **Action Buttons**: Edit, save, cancel, and delete operations
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+### 🎨 User Interface
+- **Collapsible Sidebar**: Responsive navigation with smooth transitions
+- **Theme Toggle**: Dark/light mode support
+- **Toast Notifications**: User feedback for all actions
+- **Confirmation Dialogs**: Safe deletion with confirmation prompts
+- **Responsive Design**: Mobile-friendly layout
+- **Loading States**: Skeleton loaders and empty states
+
+### 🔧 Developer Experience
+- **Type Safety**: Strict TypeScript throughout
+- **Component Architecture**: Modular, reusable components
+- **Custom Hooks**: Encapsulated business logic
+- **Validation System**: Centralized Zod schemas
+- **Field Renderers**: Extensible field type system
+- **Error Handling**: Comprehensive error boundaries
+
+## 📁 Project Structure
+
+```
+├── app/                    # Next.js App Router
+│   ├── table/             # Table page
+│   └── layout.tsx         # Root layout
+├── components/
+│   ├── layout/           # Layout components
+│   │   ├── sidebar.tsx   # Collapsible sidebar
+│   │   └── navbar.tsx    # Navigation bar
+│   ├── table/            # Table components
+│   │   ├── editable-table.tsx
+│   │   ├── add-users.tsx
+│   │   ├── delete-confirmation.tsx
+│   │   └── field-renderers/
+│   ├── ui/               # ShadCN UI components
+│   └── theme-toggle.tsx  # Theme switching
+├── lib/
+│   ├── validators.ts     # Zod validation schemas
+│   ├── mock-data.ts     # Sample data
+│   └── table-config.tsx # Table configuration
+└── types/
+    └── table.ts         # TypeScript definitions
+```
+
+## 🎯 Key Components
+
+### Editable Table System
+- **useEditableRow**: Hook for managing row editing state
+- **useTableState**: Hook for table pagination, sorting, and filtering
+- **EditableCell**: Component for inline cell editing
+- **FieldRenderer**: Extensible field type system
+
+### Validation System
+- **Zod Schemas**: Type-safe validation rules
+- **Field Validation**: Individual field validation with error messages
+- **Form Validation**: Complete form validation with error aggregation
+- **Real-time Feedback**: Live validation during editing
+
+### Layout System
+- **Collapsible Sidebar**: Animated navigation with state persistence
+- **Responsive Design**: Mobile-first approach
+- **Theme Support**: Dark/light mode switching
+
+## 🔌 Available Scripts
+
+- `npm run dev` - Start development server
+- `npm run build` - Build for production
+- `npm run start` - Start production server
+- `npm run lint` - Run ESLint
+- `npm run type-check` - Run TypeScript checks
