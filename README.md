@@ -2,16 +2,6 @@
 
 A dashboard application built with Next.js, TypeScript, and modern web technologies. Features an editable data table with advanced functionality, collapsible sidebar, and comprehensive validation system.
 
-## 🎥 Demo Video
-
-<div align="center">
-  <a href="YOUR_VIDEO_URL_HERE">
-    <img src="https://img.youtube.com/vi/YOUR_VIDEO_ID_HERE/maxresdefault.jpg" alt="Dashboard Application Demo" width="800"/>
-  </a>
-</div>
-
-*Click the image above to watch the demo video*
-
 **Key Features Demonstrated:**
 - ✏️ Inline table editing with real-time validation
 - 📊 Column sorting
